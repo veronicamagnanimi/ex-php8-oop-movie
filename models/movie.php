@@ -7,7 +7,7 @@ class Movie {
     public $year;
 
     //costruttore
-    public function __construct($_title, $_director, $_genre, $_year) {
+    public function __construct($_title, $_director, Genre $_genre, $_year) {
         $this->title = $_title;
         $this->director = $_director;
         $this->genre = $_genre;
