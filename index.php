@@ -1,46 +1,66 @@
-<?php 
-
-require_once './traits/actors.php';
-require_once './models/genre.php';
-require_once './models/movie.php';
-
+<?php
+require_once './database.php';
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            height: 100%;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Movie</h1>
+<div class="container mt-5">
+        <h1 class="text-center mb-4">Movies</h1>
+        
+        <div class="row justify-content-center">
+            <?php foreach ($movies as $movie) { ?>
+                <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm mb-4 w-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php $movie->title ?></h5>
+                            <h6 class="card-subtitle text-muted">Directed by <?php echo $movie->director ?></h6>
+                            <p class="card-text"><strong>Year:</strong> <?php echo $movie->year ?></p>
+                            
+                            <!-- Generi -->
+                            <p class="card-text"><strong>Genres:</strong> 
+                                <?php 
+                                $genreNames = [];
+                                foreach ($movie->genres as $genre) {
+                                    $genreNames[] = $genre->name;
+                                }
+                                echo implode(', ', $genreNames);
+                                ?>
+                            </p>
 
-    <!-- oggetti Movie -->
-   <?php 
-   $first_movie = new Movie('Terminator 2', 'James Cameron', [
-    new Genre('Action', 'The action genre is characterized by adrenaline-pumping scenes, fights, spectacular chases and explosions.'),
-    new Genre('Sci-Fi', 'The science fiction genre deals with imaginative and futuristic concepts.')
-], 1991);
+                            <!-- Attori -->
+                            <p class="card-text"><strong>Actors:</strong> <?php echo implode(', ', $movie->getActors()) ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 
-$second_movie = new Movie('Sons of the Empire', 'James Callahan', [
-    new Genre('Historical', 'The historical genre tells about events, characters or eras of the past.')
-], 2025);
-   
 
-   var_dump($first_movie->getYear());
-   var_dump($second_movie->getYear());
 
-//    traits
-$first_movie->setActors(['Arnold Schwarzenegger', 'Linda Hamilton', 'Edward Furlong']);
-$second_movie->setActors(['John Doe', 'Jane Doe']);
-
-var_dump($first_movie);
-   var_dump($second_movie);
-
-   ?>
+    
 
 
 </body>
+
 </html>
