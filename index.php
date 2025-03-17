@@ -1,5 +1,6 @@
 <?php 
 
+require_once './traits/actors.php';
 require_once './models/genre.php';
 require_once './models/movie.php';
 
@@ -26,11 +27,20 @@ require_once './models/movie.php';
 $second_movie = new Movie('Sons of the Empire', 'James Callahan', [
     new Genre('Historical', 'The historical genre tells about events, characters or eras of the past.')
 ], 2025);
-   var_dump($first_movie);
-   var_dump($second_movie);
+   
 
    var_dump($first_movie->getYear());
    var_dump($second_movie->getYear());
+
+//    traits
+$first_movie->setActors(['Arnold Schwarzenegger', 'Linda Hamilton', 'Edward Furlong']);
+$second_movie->setActors(['John Doe', 'Jane Doe']);
+
+var_dump($first_movie);
+   var_dump($second_movie);
+
    ?>
+
+
 </body>
 </html>

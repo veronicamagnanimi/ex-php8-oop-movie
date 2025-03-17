@@ -6,6 +6,8 @@ class Movie {
     public $genres;
     public $year;
 
+    use Actors;
+
     //costruttore
     public function __construct($_title, $_director, array $_genres, $_year) {
         $this->title = $_title;
